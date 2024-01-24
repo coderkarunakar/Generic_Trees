@@ -34,20 +34,20 @@ def printTreeDetail(root):
         #by calling the above function,by pasing child index to check its children
         printTreeDetail(child)
 
-n1 = TreeNode(5)
-n2 = TreeNode(2)
-n3 = TreeNode(9)
-n4 = TreeNode(8)
-n5 = TreeNode(7)
-n6 = TreeNode(15)
-n7 = TreeNode(1)
+def takeTreeInput():
+    print("Enter the root data")
+    rootData = int(input(""))
+    if rootData == -1:
+        return None
+    root = TreeNode(rootData)
+    #for every single node this will be processed
+    print("Enter the no of children for", rootData)
+    childrenCount = int(input())
+    for i in range(childrenCount):
+        #for that particular child it is calling again the above function
+        child = takeTreeInput()
+        root.children.append(child)
+    return root
 
-n1.children.append(n2)
-n1.children.append(n3)
-n1.children.append(n4)
-n1.children.append(n5)
-n3.children.append(n6)
-n3.children.append(n7)
-
-# printTree(n1)
-printTreeDetail(n1)
+root = takeTreeInput()
+printTreeDetail(root)
