@@ -27,7 +27,7 @@ def printTreeDetail(root):
     for child in root.children:
         print(child.data, ",", end="")
     #this to get a new line 
-    print()
+    print() 
 #this is for calling the children 
 #paina print chesina 1st danni oka child ki malli malli call chestundi
     for child in root.children:

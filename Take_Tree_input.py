@@ -48,6 +48,14 @@ def takeTreeInput():
         child = takeTreeInput()
         root.children.append(child)
     return root
-
+def numNodes(root):
+    if root == None:
+        return 0
+    count =1 
+    for child in root.children:
+        #increments the count by recursively calling the numnodes   function on each child of the current node,effectively counting all nodes in the subtree rooted at the current node
+        count = count + numNodes(child)
+    return count
 root = takeTreeInput()
 printTreeDetail(root)
+print("the no of nodes is ",numNodes(root))
