@@ -3,36 +3,54 @@ class TreeNode:
         self.value = value
         self.children = []
 
-def build_tree_from_input(input_sequence):
-    if not input_sequence:
+def printTree(root):
+    if root is None:
+        return
+    print(root.value)
+    for child in root.children:
+        printTree(child)
+
+def printTreeDetail(root):
+    if root is None:
+        return
+    print(root.value, ":", end="")
+    for child in root.children:
+        print(child.value, ",", end="")
+    print()
+    for child in root.children:
+        printTreeDetail(child)
+
+def takeTreeInput():
+    print("Enter the root data")
+    rootData = int(input(""))
+    if rootData == -1:
         return None
-
-    root_value = input_sequence.pop(0)
-    root = TreeNode(root_value)
-
-    num_children = input_sequence.pop(0)
-    for _ in range(num_children):
-        child = build_tree_from_input(input_sequence)
+    root = TreeNode(rootData)
+    print("Enter the no of children for", rootData)
+    childrenCount = int(input())
+    for i in range(childrenCount):
+        child = takeTreeInput()
         root.children.append(child)
-
     return root
 
 def sum_of_nodes(root):
+    #base case if root is empty then simply return sum as 0
     if root is None:
         return 0
-
+#initialize total sum with the value of the current root node
     total_sum = root.value
+    #iterate through each child of the current root
     for child in root.children:
+        #recursively    call sum_of_nodes on each child and add the result to the total sum,this line is calling on each node and adding all those nodes and finally add it to the total sum i.e root value
         total_sum += sum_of_nodes(child)
-
+#return the total sum for the current subtree rooted at root
     return total_sum
 
 # Sample input
-input_sequence = [10, 3, 20, 30, 40, 2, 40, 2, 40, 50, 0, 0, 0, 0]
-
-# Build the generic tree
-root_node = build_tree_from_input(input_sequence)
+root = takeTreeInput()
+printTreeDetail(root)
 
 # Calculate and print the sum of all nodes
-result = sum_of_nodes(root_node)
-print(result)
+result = sum_of_nodes(root)
+print("the sum of all nodes are",result)
+ 
