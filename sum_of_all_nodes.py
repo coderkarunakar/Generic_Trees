@@ -45,6 +45,22 @@ def sum_of_nodes(root):
         total_sum += sum_of_nodes(child)
 #return the total sum for the current subtree rooted at root
     return total_sum
+def find_largest_node(root):
+    #base case
+    if not root:
+        return None
+
+    # Initialize max_data with the value of the root node,initially
+    max_data = root.value
+
+    # Iterate through children and recursively find the maximum value
+    for child in root.children:
+        child_max = find_largest_node(child)
+        #child max is greater than the root value i.e max_data then simply replace it ,and max_data get updated regularly and stores it in the max_data and finally returns it
+        if child_max is not None and child_max > max_data:
+            max_data = child_max
+
+    return max_data
 
 # Sample input
 root = takeTreeInput()
@@ -53,4 +69,8 @@ printTreeDetail(root)
 # Calculate and print the sum of all nodes
 result = sum_of_nodes(root)
 print("the sum of all nodes are",result)
- 
+ # Find the node with the largest data
+largest_node_data = find_largest_node(root)
+
+# Print the result
+print(largest_node_data)
