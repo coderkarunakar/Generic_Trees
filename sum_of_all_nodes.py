@@ -62,6 +62,25 @@ def find_largest_node(root):
 
     return max_data
 
+
+def find_tree_height(root):
+    #base case if there is no root then simply return height as 0
+    if not root:
+        return 0
+
+    # Calculate the height of each child and find the maximum
+    #initially keeping max child height as 0 
+    max_child_height = 0
+    #iterating into the root's children 
+    for child in root.children:
+        #calling the function recursively 
+        child_height = find_tree_height(child)
+        #picking the max height among the our initialized one and height of the child height in the root's children
+        max_child_height = max(max_child_height, child_height)
+
+    # Add 1 to the maximum child height to account for the current level
+    return 1 + max_child_height
+
 # Sample input
 root = takeTreeInput()
 printTreeDetail(root)
@@ -74,3 +93,7 @@ largest_node_data = find_largest_node(root)
 
 # Print the result
 print(largest_node_data)
+
+
+height = find_tree_height(root)
+print("Height of the tree:", height)
